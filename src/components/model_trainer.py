@@ -2,6 +2,7 @@
 # Call the confusion matrix while solving the classification problem and use RSE,MRSE for regression.
 import os
 import sys
+import numpy as np
 from dataclasses import dataclass
 
 from catboost import CatBoostRegressor
@@ -115,3 +116,17 @@ class ModelTrainer:
            
         except Exception as e:
             raise CustomException(e,sys)
+
+if __name__ == "__main__":
+    logging.info("Running model_trainer.py as standalone script")
+
+    try:
+        train_arr = np.load("artifacts/train_array.npy")
+        test_arr = np.load("artifacts/test_array.npy")
+
+        trainer = ModelTrainer()
+        score = trainer.initiate_model_trainer(train_arr, test_arr)
+        logging.info(f"Model training completed with R2 score: {score}")
+        print(f"R² Score: {score}")
+    except Exception as e:
+        logging.error(f"Error during model training: {e}")

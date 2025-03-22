@@ -1,3 +1,4 @@
+# setup.py is used to build our application as a package
 from setuptools import find_packages,setup
 from typing import List
 
@@ -16,10 +17,10 @@ def get_requirements(file_path:str)->List[str]: # to get the libraries in requir
 
 
 setup(
-name="ML Project Automation",
+name="ML Project CI CD Automation",
 version="0.0.1",
 author="Pooja Anilkumar",
 author_email="pujaa22@gmail.com",
 packages=find_packages(),
-install_requires=get_requirements("requirements.txt")
+install_requires=get_requirements("requirements.txt") # to install the dependencies
 )

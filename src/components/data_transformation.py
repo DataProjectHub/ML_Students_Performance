@@ -1,5 +1,9 @@
+# The purpose of doing data transformation is feature engineering, data cleaning etc.
+
 import sys
 from dataclasses import dataclass
+from src.logger import logging
+
 
 import numpy as np 
 import pandas as pd
@@ -114,6 +118,9 @@ class DataTransformation:
                 obj=preprocessing_obj
 
             )
+            # Save transformed arrays as .npy files for reuse
+            np.save("artifacts/train_array.npy", train_arr)
+            np.save("artifacts/test_array.npy", test_arr)
 
             return (
                 train_arr,
@@ -122,3 +129,11 @@ class DataTransformation:
             )
         except Exception as e:
             raise CustomException(e,sys)
+if __name__ == "__main__":
+    logging.info("Running data_transformation.py as standalone script")
+    try:
+        obj = DataTransformation()
+        obj.initiate_data_transformation("artifacts/train.csv", "artifacts/test.csv")
+        logging.info("Data transformation completed successfully")
+    except Exception as e:
+        logging.error(f"Error during data transformation: {e}")

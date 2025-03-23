@@ -2,7 +2,6 @@
 # into the cloud.
 import os
 import sys
-
 import numpy as np 
 import pandas as pd
 import dill
@@ -57,8 +56,11 @@ def evaluate_models(X_train, y_train,X_test,y_test,models,param):
     
 def load_object(file_path):
     try:
+        print(f"Loading object from: {file_path}")
         with open(file_path, "rb") as file_obj:
-            return pickle.load(file_obj)
-
+            obj = dill.load(file_obj)
+        print("Object loaded successfully")
+        return obj
     except Exception as e:
-        raise CustomException(e, sys)
+        print(f"Failed to load object: {e}")
+        raise e

@@ -8,4 +8,6 @@ consider as a package. Component is meant for data Ingestion, Data transformatio
 
 ## Pipeline
 It contain the __init__.py to cnsider the folder as a package. Contain the training and prediction pipeline.
+The data from the web application student performance form will be interacting with the .pkl files (pickle)
+and verify that the prediction has been done using the predict_pipeline.py 
 
